@@ -1,0 +1,25 @@
+body {
+  background-color: black;
+}
+#pano {
+  background-color: white;
+  border: 3px solid red;
+  height: 100%;
+  width: 100%;
+}
+
+.c-panoviewer-hotspot {
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+.c-panoviewer-hotspot__content {
+    width: 3rem;
+    height: 3rem;
+    background-color: red;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+}

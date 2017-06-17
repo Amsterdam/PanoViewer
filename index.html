@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="css/panoview.css" />
+  </head>
+  <body>
+    <script src="libs/marzipano.js"></script>
+    <script src="js/PanoViewer.js"></script>
+    <!-- TODO shims -->
+    <div id="pano"></div>
+    <script>
+      pv = new PanoViewer();
+      pv.init('#pano');
+      pv.loadPanorama(52.3730353, 4.8932471);
+    </script>
+ </body>
+</html>

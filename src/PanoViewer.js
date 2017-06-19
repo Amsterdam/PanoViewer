@@ -1,3 +1,4 @@
+import Marzipano from 'Marzipano';
 
 function PanoViewer (opts) {
     const self = this;

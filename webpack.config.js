@@ -1,9 +1,20 @@
 const path = require('path');
 
 module.exports = {
-    entry: './js/PanoViwer.js',
+    entry: './src/PanoViewer.js',
     output: {
-        path: path.reslove(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'panoviewer.js'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            }
+        ]
     }
 };

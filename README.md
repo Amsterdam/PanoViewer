@@ -2,6 +2,14 @@
 
 A javascript library to view Amsterdam muncipality panorama images.
 
+## Install
+
+No steps required
+
+## Run
+
+Serve `index.html` and open in browser.
+
 ## Technology Stack
 
 ### Libraries

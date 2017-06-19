@@ -126,6 +126,10 @@ function PanoViewer (opts) {
     };
 
     function updateConfig (opts) {
+        // @TODO only support certian known keys and handle then carefully
+        for (opt of opts) {
+            config[opt] = opts[opt];
+        }
         // Finally adding callbacks if it is set to on
         if (config.ADD_CALLBACKS) {
             addCallbacks();

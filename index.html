@@ -1,13 +1,12 @@
 <html>
   <head>
-    <link rel="stylesheet" href="css/panoview.css" />
+    <link rel="stylesheet" href="../css/panoview.css" />
   </head>
   <body>
-    <script src="./panoviewer.js"></script>
+    <script src="panoviewer.js"></script>
     <div id="pano"></div>
     <script>
-      pv = new PanoViewer();
-      pv.init('#pano');
+      pv = new PanoViewer('#pano');
       pv.loadPanorama(52.3730353, 4.8932471);
     </script>
  </body>

@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/PanoViewer.js',
+    entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'panoviewer.js'
@@ -10,10 +10,10 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
+                use: 'css-loader'
+            }, {
+                test: /node_modules/,
+                loader: 'ify-loader'
             }
         ]
     }

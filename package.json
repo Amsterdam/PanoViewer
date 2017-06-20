@@ -24,6 +24,7 @@
     "webpack": "^2.6.1"
   },
   "dependencies": {
+    "ify-loader": "^1.0.4",
     "marzipano": "^0.5.4"
   }
 }

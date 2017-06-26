@@ -9,7 +9,7 @@ const config = {
     API_ROOT: 'https://acc.api.data.amsterdam.nl/',
     PANO_URI: 'panorama/recente_opnames/alle/',
     RADIUS: 100,
-    FOV: 80,
+    FOV: 80 * degree_to_radian,
     MAX_FOV: 90,
     MAX_RESOLUTION: 12 * 1024,
     CAMERA_HEIGHT: 1.8,
@@ -42,6 +42,11 @@ class PanoViewer {
     constructor(insertion, opts) {
         this.view = null;
         this.scene = null;
+        this.pov = {
+            fov: config.FOV,
+            yaw: 0,
+            pitch: 0
+        }
 
         const panoElement = getElement(insertion);
         if (!panoElement) {
@@ -56,7 +61,7 @@ class PanoViewer {
         }
     }
 
-    _loadScene (heading, pitch, fov, data) {
+    _loadScene (data) {
         const image = data.image;
         const hotspots = data.hotspots;
         try {
@@ -69,11 +74,7 @@ class PanoViewer {
             );
 
             this.view = new Marzipano.RectilinearView(
-                {
-                    yaw: degree_to_radian * heading,
-                    pitch: degree_to_radian * pitch,
-                    fov: degree_to_radian * fov
-                },
+                this.pov,
                 viewLimiter);
 
             this.scene = this.viewer.createScene({
@@ -85,6 +86,10 @@ class PanoViewer {
 
             this._addHotspots(hotspots);
 
+            // Tracking the POV changes
+            this.viewer.controls().addEventListener('inactive', () => {
+                 this.pov = this.view.parameters();
+             });
             this.scene.switchTo();
         } catch (e) {
             console.log(e);
@@ -95,7 +100,7 @@ class PanoViewer {
      * 
      * @param {float} lat - Latitude 
      * @param {float} lon - Longtitude
-     * @param {float} heading - initial heading (optional)
+     * @param {float} yaw - initial yaw (optional)
      * @param {float} pitch - initial pitch (optional)
      * @param {float} fov - Field of vision (optional)
      * 
@@ -103,26 +108,23 @@ class PanoViewer {
      * After this has been called navigating within the panorama via hotspots
      * is handled by FUNCTION_NAME
      */
-    loadPanorama (lat, lon, heading, pitch, fov) {
+    loadPanorama (lat, lon, yaw, pitch, fov) {
         const url = config.API_ROOT + config.PANO_URI + '?lat=' +
                 lat+ '&lon=' + lon + '&radius=' + config.RADIUS;
 
-        // Setting defaults if not given
-        fov = fov || config.FOV;
-        heading = heading || 0;
-        pitch = pitch || 0;
+        // Updating POV if needed
+        this.pov.fov = fov || this.pov.fov;
+        this.pov.yaw = yaw || this.pov.yaw;
+        this.pov.pitch = pitch || this.pov.pitch;
         return (this.constructor._getPanoramaData(url))
-            .then((data) => this._loadScene(heading, pitch, fov, data));
+            .then((data) => this._loadScene(data));
     };
 
     _updatePanorama (pano_id) {
         const url = config.API_ROOT + config.PANO_URI + pano_id;
 
-        const fov = 80,
-            heading = 0,
-            pitch = 0;
         return (this.constructor._getPanoramaData(url))
-            .then((data) => this._loadScene(heading, pitch, fov, data));
+            .then((data) => this._loadScene(data));
     };
 
     updateConfig (opts) {
@@ -143,7 +145,7 @@ class PanoViewer {
             hotspots.sort(function (hotspotA, hotspotB) {
                 return hotspotB.distance - hotspotA.distance;
             }).forEach((hotspot) => {
-                hs = new Hotspot(hotspot.id, config.CAMERA_HEIGHT, hotspot.distance, hotspot.heading, hotspot.year)
+                hs = new Hotspot(hotspot.id, config.CAMERA_HEIGHT, hotspot.distance, hotspot.yaw, hotspot.year)
                 hs.element.firstChild.addEventListener('click', () => this._updatePanorama(hotspot.id));
                 container.createHotspot(hs.element, hs.position);
             }
@@ -181,7 +183,7 @@ class PanoViewer {
             hotspots: response.adjacent.map(function (item) {
                 return {
                     id: item.pano_id,
-                    heading: item.heading,
+                    yaw: item.heading,
                     distance: item.distance,
                     year: item.year
                 };
@@ -191,7 +193,7 @@ class PanoViewer {
         };
         return {
             image: data.image,
-            heading: response.heading,
+            yaw: response.yaw,
             pitch: response.pitch,
             hotspots: data.hotspots
         }

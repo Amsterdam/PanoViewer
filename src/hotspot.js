@@ -2,7 +2,7 @@ const scaleFactor = 10.0;
 
 class Hotspot {
     
-    constructor (hotspotId, cameraHeight, distance, heading, year, hotspotNodeType, scaleToDistance) {
+    constructor (hotspotId, cameraHeight, distance, yaw, year, hotspotNodeType, scaleToDistance) {
         this.hotspotNodeType = 'div';
         this.scaleToDistance = true;
         this.pitchCorrection = Math.PI / 180 / 2;
@@ -15,7 +15,7 @@ class Hotspot {
         this.year = year;
         this.pitch = this.constructor._calculateHotspotPitch(cameraHeight, distance);
         this.position = {
-            yaw: heading * Math.PI / 180,
+            yaw: yaw * Math.PI / 180,
             pitch: this.pitch
         };
         this.hotspotNodeType = hotspotNodeType || this.hotspotNodeType;

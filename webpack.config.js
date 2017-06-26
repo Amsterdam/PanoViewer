@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = [{
     entry: ['babel-polyfill', './src/index.js'],
@@ -29,6 +30,23 @@ module.exports = [{
         path: path.resolve(__dirname, 'dist'),
         filename: 'panoviewer.min.js'
     },
+    plugins: [
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            beautify: false,
+            mangle: {
+                screw_ie8: true,
+                keep_fnames: true
+            },
+            compress: {
+                screw_ie8: true
+            },
+            comments: false
+        })
+    ],
     module: {
         rules: [
             {
@@ -46,4 +64,18 @@ module.exports = [{
             }
         ]
     }
+}, {
+    entry: ['./src/index.js'],
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'panoviewer.lib.js'
+    },
+    externals: {
+        "marzipano": {
+            commonjs: "marzipano",
+            commonjs2: "marzipano",
+            amd: "marzipano",
+            root: "_"
+        }
+    } 
 }];

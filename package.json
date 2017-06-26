@@ -2,7 +2,7 @@
   "name": "panoview",
   "version": "1.0.0",
   "description": "A javascript library to view Amsterdam muncipality panorama images.",
-  "main": "webpack.config.js",
+  "main": "dist/panoviewer.min.js",
   "scripts": {
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"

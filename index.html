@@ -3,11 +3,36 @@
     <link rel="stylesheet" href="../css/panoview.css" />
   </head>
   <body>
-    <script src="panoviewer.js"></script>
-    <div id="pano"></div>
+    <script src="panoviewer.min.js"></script>
+    <div id="selector">
+      <div class="buttons">
+        <div class="button_container">
+          <button onclick="load(52.375000, 5.215400)" class="city_button">Almere</button>
+        </div>
+        <div class="button_container">
+          <button onclick="load(52.3730353, 4.8932471)" class="city_button">Amsterdam</button>
+        </div>
+        <div class="button_container">
+          <button onclick="load(52.302919, 4.857236)" class="city_button">Amstelveen</button>
+        </div>
+      </div>
+      <hr>
+      <p class="text">Kies een stad om te bekijken</p>
+    </div>
+    <div id="pano" class="hide"></div>
     <script>
-      pv = new PanoViewer('#pano');
-      pv.loadPanorama(52.3730353, 4.8932471);
+      function load(lat, lon) {
+        document.getElementById('selector').classList.toggle('hide');
+        document.getElementById('pano').classList.toggle('hide');
+        pv = new PanoViewer('#pano');
+        pv.loadPanorama(lat, lon);
+      }
+      document.addEventListener('keyup', function (evt) {
+        if (evt.keyCode === 27) {
+          document.getElementById('pano').classList.add('hide');
+          document.getElementById('selector').classList.remove('hide');
+        }
+      });
     </script>
  </body>
 </html>

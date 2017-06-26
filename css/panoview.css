@@ -1,9 +1,46 @@
-body {
-  background-color: black;
+body, div, button, img, span, p {
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
+
+body {
+  background-color: white;
+  font-family: sans-serif;
+  font-size: 10pt;
+}
+
+#selector {
+  padding: 20% 3rem;
+  text-align: center;
+}
+
+.buttons {
+  overflow: auto;
+  padding-bottom: 5%;
+}
+.button_container {
+  width: 33%;
+  display: inline-block;
+}
+
+.city_button {
+  padding: 1rem 2rem;
+  font-size: 3rem;
+  color: black;
+  background-color: inherit;
+  border: 2px solid black;
+  border-radius: 0.25rem;
+}
+
+.text {
+  margin-top: 5%;
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
 #pano {
   background-color: white;
-  border: 3px solid red;
   height: 100%;
   width: 100%;
 }
@@ -22,4 +59,8 @@ body {
     border-radius: 50%;
     cursor: pointer;
     pointer-events: auto;
+}
+
+.hide {
+  display: none;
 }

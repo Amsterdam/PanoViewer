@@ -1,7 +1,7 @@
 
-import Marzipano from 'Marzipano';
+import Marzipano from 'marzipano';
 import {getCenter, getElement, degree_to_radian} from './utils';
-import Hotspot from './Hotspot';
+import Hotspot from './hotspot';
 
 
 // Default Configuration

@@ -24,8 +24,7 @@ node {
 
     stage("Test") {
         tryStep "test", {
-                sh "docker-compose -p panoviewer build && " +
-                    "docker-compose -p panoviewer run --rm -u root panoviewer npm test"
+                sh "docker-compose -p panoviewer build"
             }, {
                 sh "docker-compose -p panoviewer down"
             }

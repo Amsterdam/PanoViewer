@@ -67,6 +67,7 @@ body {
   width: 5rem;
   height: 5rem;
   transform-origin: 2.5rem;
+  transition: 0.1s;
 }
 .compass {
   z-index: 2;

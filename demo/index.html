@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../css/panoview.css" />
+  </head>
+  <body>
+    <script src="../dist/panoviewer.js"></script>
+    <div id="selector">
+      <div class="buttons">
+        <div class="button_container">
+          <button onclick="load(52.375000, 5.215400)" class="city_button">Almere</button>
+        </div>
+        <div class="button_container">
+          <button onclick="load(52.3730353, 4.8932471)" class="city_button">Amsterdam</button>
+        </div>
+        <div class="button_container">
+          <button onclick="load(52.302919, 4.857236)" class="city_button">Amstelveen</button>
+        </div>
+      </div>
+      <hr>
+      <p class="text">Kies een stad om te bekijken</p>
+    </div>
+    <div id=main class="hide">
+      <div id="pano" ></div>
+      <div id="compass_container">
+        <img src="compass.png" class="compass">
+      </div>
+    </div>
+    <script>
+      function turnCompass(params) {
+        const direction = params.yaw;
+        const compass = document.getElementById('compass_container');
+        compass.setAttribute('style', 'transform: rotateZ(' + direction + 'rad);');
+      }
+
+      function blinkCompass(params) {
+        const compass = document.getElementById('compass_container');
+        compass.classList.toggle('enlarge');
+      }
+
+      function load(lat, lon) {
+        document.getElementById('selector').classList.toggle('hide');
+        document.getElementById('main').classList.toggle('hide');
+        pv = new PanoViewer('#pano');
+        pv.updateConfig({
+          CALLBACKS: {
+            change: turnCompass,
+            active:blinkCompass,
+            inactive: blinkCompass
+          }
+        });
+        pv.loadPanorama(lat, lon);
+      }
+      document.addEventListener('keyup', function (evt) {
+        if (evt.keyCode === 27) {
+          document.getElementById('main').classList.add('hide');
+          document.getElementById('selector').classList.remove('hide');
+        }
+      });
+    </script>
+ </body>
+</html>

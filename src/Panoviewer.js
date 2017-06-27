@@ -19,11 +19,7 @@ const config = {
         {tileSize: 512, size: 1024},
         {tileSize: 512, size: 2048}
     ],
-    ADD_CALLBACKS: false,  // Whether to add callbacks on changes
-    CALLBACKS: {
-        'active': console.log,
-        'inactive': console.log
-    }
+    CALLBACKS: null
 };
 
 const viewerOpts = {
@@ -86,8 +82,12 @@ class PanoViewer {
 
             this._addHotspots(hotspots);
 
+            // Finally adding callbacks if it is set to on
+            if (config.CALLBACKS) {
+                this._addCallbacks();
+            }
             // Tracking the POV changes
-            this.viewer.controls().addEventListener('inactive', () => {
+            this.view.addEventListener('change', () => {
                  this.pov = this.view.parameters();
              });
             this.scene.switchTo();
@@ -129,12 +129,10 @@ class PanoViewer {
 
     updateConfig (opts) {
         // @TODO only support certian known keys and handle then carefully
-        for (opt of opts) {
-            config[opt] = opts[opt];
-        }
-        // Finally adding callbacks if it is set to on
-        if (config.CALLBACKS) {
-            this._addCallbacks();
+        for (let opt of Object.keys(config)) {
+            if (opts[opt]) {
+                config[opt] = opts[opt];
+            }
         }
     };
 
@@ -156,11 +154,17 @@ class PanoViewer {
     }
 
     _addCallbacks() {
-        for (evt of config.CALLBACKS) {
-            this.viewer.controls().addEventListener(evt, function() {
-                const parameters = view.parameters();
+        let event_register = null;
+        for (let evt of Object.keys(config.CALLBACKS)) {
+            if (evt === 'active' || evt === 'inactive') {
+                event_register = this.viewer.controls();
+            } else {
+                event_register = this.view;
+            }
+            event_register.addEventListener(evt, () => {
+                const parameters = this.view.parameters();
                 config.CALLBACKS[evt](parameters);
-            })
+            });
         }
     }
   

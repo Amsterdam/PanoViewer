@@ -20,6 +20,10 @@
       <p class="text">Kies een stad om te bekijken</p>
     </div>
     <div id=main class="hide">
+      <div id="info">
+        <span>Latitude: </span><span id="lat"></span>
+        <span>Longitude: </span><span id="lon"></span>
+      </div>
       <div id="pano" ></div>
       <div id="compass_container">
         <img src="compass.png" class="compass">
@@ -37,6 +41,11 @@
         compass.classList.toggle('enlarge');
       }
 
+      function changeLocation(location) {
+        document.getElementById('lat').innerText = location[0];
+        document.getElementById('lon').innerText = location[1];
+      }
+
       function load(lat, lon) {
         document.getElementById('selector').classList.toggle('hide');
         document.getElementById('main').classList.toggle('hide');
@@ -45,7 +54,8 @@
           CALLBACKS: {
             change: turnCompass,
             active:blinkCompass,
-            inactive: blinkCompass
+            inactive: blinkCompass,
+            location: changeLocation
           }
         });
         pv.loadPanorama(lat, lon);

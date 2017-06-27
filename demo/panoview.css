@@ -39,6 +39,18 @@ body {
   font-weight: 300;
 }
 
+#info {
+  background-color: #333;
+  color: white;
+  padding: 0.25rem;
+  width: 100%;
+  text-align: center;
+}
+
+#lat {
+  margin-right: 3rem;
+}
+
 #pano {
   background-color: white;
   height: 100%;

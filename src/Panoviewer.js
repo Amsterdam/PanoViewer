@@ -128,7 +128,7 @@ class PanoViewer {
     };
 
     updateConfig (opts) {
-        // @TODO only support certian known keys and handle then carefully
+        // @TODO Handle value carefully
         for (let opt of Object.keys(config)) {
             if (opts[opt]) {
                 config[opt] = opts[opt];
@@ -158,13 +158,17 @@ class PanoViewer {
         for (let evt of Object.keys(config.CALLBACKS)) {
             if (evt === 'active' || evt === 'inactive') {
                 event_register = this.viewer.controls();
-            } else {
+            } else if (evt !== 'location') {
                 event_register = this.view;
+            } else {
+                event_register = null;
             }
-            event_register.addEventListener(evt, () => {
-                const parameters = this.view.parameters();
-                config.CALLBACKS[evt](parameters);
-            });
+            if (event_register) {
+                event_register.addEventListener(evt, () => {
+                    const parameters = this.view.parameters();
+                    config.CALLBACKS[evt](parameters);
+                });
+            }
         }
     }
   
@@ -195,6 +199,12 @@ class PanoViewer {
             location: getCenter(formattedGeometrie),
             image: response.image_sets.cubic
         };
+
+        // Call location change callback, if one is given
+        if (config.CALLBACKS && config.CALLBACKS.location) {
+            config.CALLBACKS.location(data.location);
+        }
+
         return {
             image: data.image,
             yaw: response.yaw,

@@ -6,14 +6,14 @@
     <script src="../dist/panoviewer.min.js"></script>
     <div id="selector">
       <div class="buttons">
-        <div class="button_container">
-          <button onclick="load(52.375000, 5.215400)" class="city_button">Almere</button>
+        <div class="button-container">
+          <button onclick="load(52.375000, 5.215400)" class="city-button">Almere</button>
         </div>
-        <div class="button_container">
-          <button onclick="load(52.3730353, 4.8932471)" class="city_button">Amsterdam</button>
+        <div class="button-container">
+          <button onclick="load(52.3730353, 4.8932471)" class="city-button">Amsterdam</button>
         </div>
-        <div class="button_container">
-          <button onclick="load(52.302919, 4.857236)" class="city_button">Amstelveen</button>
+        <div class="button-container">
+          <button onclick="load(52.302919, 4.857236)" class="city-button">Amstelveen</button>
         </div>
       </div>
       <hr>
@@ -25,19 +25,20 @@
         <span>Longitude: </span><span id="lon"></span>
       </div>
       <div id="pano" ></div>
-      <div id="compass_container">
+      <div id="compass-container">
         <img src="compass.png" class="compass">
       </div>
     </div>
     <script>
+      let pv = null;
       function turnCompass(params) {
         const direction = params.yaw;
-        const compass = document.getElementById('compass_container');
+        const compass = document.getElementById('compass-container');
         compass.setAttribute('style', 'transform: rotateZ(' + direction + 'rad);');
       }
 
       function blinkCompass(params) {
-        const compass = document.getElementById('compass_container');
+        const compass = document.getElementById('compass-container');
         compass.classList.toggle('enlarge');
       }
 
@@ -53,7 +54,7 @@
         pv.updateConfig({
           CALLBACKS: {
             change: turnCompass,
-            active:blinkCompass,
+            active: blinkCompass,
             inactive: blinkCompass,
             location: changeLocation
           }

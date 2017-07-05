@@ -1,5 +1,5 @@
 
-const degree_to_radian = Math.PI / 180;
+const degreeToRadian = Math.PI / 180;
 
 function isNumeric (obj) {
     return !isNaN(obj - parseFloat(obj));
@@ -44,14 +44,14 @@ function getCenter (geoJSON) {
 
 /**
  * Returns a dom element to insert the panorama viewer
- * supports DOM element, id and class both as name or
+ * Supports DOM element, id and class both as name or
  * with # / . notation before. If no element could be
  * found returns undefined
  */
 function getElement (insertion) {
     let element;
-    // If its already a dom element its all good
     if (insertion) {
+        // If its already a dom element its all good
         if (insertion instanceof HTMLElement) {
             return insertion;
         }
@@ -65,7 +65,7 @@ function getElement (insertion) {
         element = document.getElementById(insertion);
     }
     // If found return it, otherwise go with class name
-    return (element)? element : document.getElementsByClassName(insertion)[0];
+    return  element || document.getElementsByClassName(insertion)[0];
 }
 
-export {isNumeric, getCenter, getElement, degree_to_radian};
+export {isNumeric, getCenter, getElement, degreeToRadian};

@@ -1,6 +1,6 @@
 
 import Marzipano from 'marzipano';
-import {getCenter, getElement, degree_to_radian} from './utils';
+import {getCenter, getElement, degreeToRadian} from './utils';
 import Hotspot from './hotspot';
 
 
@@ -9,7 +9,7 @@ const config = {
     API_ROOT: 'https://acc.api.data.amsterdam.nl/',
     PANO_URI: 'panorama/recente_opnames/alle/',
     RADIUS: 100,
-    FOV: 80 * degree_to_radian,
+    FOV: 80 * degreeToRadian,
     MAX_FOV: 90,
     MAX_RESOLUTION: 12 * 1024,
     CAMERA_HEIGHT: 1.8,
@@ -46,8 +46,7 @@ class PanoViewer {
 
         const panoElement = getElement(insertion);
         if (!panoElement) {
-            // @TODO Error handling
-            return 'ERROR!';
+            return Error('No dom element available');
         }
         this.viewer = new Marzipano.Viewer(panoElement, viewerOpts);
 
@@ -66,7 +65,7 @@ class PanoViewer {
             );
             const viewLimiter = Marzipano.RectilinearView.limit.traditional(
                 config.MAX_RESOLUTION,
-                degree_to_radian * config.MAX_FOV
+                degreeToRadian * config.MAX_FOV
             );
 
             this.view = new Marzipano.RectilinearView(
@@ -92,7 +91,7 @@ class PanoViewer {
              });
             this.scene.switchTo();
         } catch (e) {
-            console.log(e);
+            console.error(`Error Loading scene: ${e}`);
         }
     }
 
@@ -100,17 +99,16 @@ class PanoViewer {
      * 
      * @param {float} lat - Latitude 
      * @param {float} lon - Longtitude
-     * @param {float} yaw - initial yaw (optional)
-     * @param {float} pitch - initial pitch (optional)
-     * @param {float} fov - Field of vision (optional)
+     * @param {float} [yaw] - initial yaw
+     * @param {float} [pitch] - initial pitch
+     * @param {float} [fov] - Field of vision
      * 
      * This is the main api interaction for loading the panorama view.
      * After this has been called navigating within the panorama via hotspots
-     * is handled by FUNCTION_NAME
+     * is handled by _updatePanorama
      */
     loadPanorama (lat, lon, yaw, pitch, fov) {
-        const url = config.API_ROOT + config.PANO_URI + '?lat=' +
-                lat+ '&lon=' + lon + '&radius=' + config.RADIUS;
+        const url = `${config.API_ROOT + config.PANO_URI}?lat=${lat}&lon=${lon}&radius=${config.RADIUS}`;
 
         // Updating POV if needed
         this.pov.fov = fov || this.pov.fov;
@@ -140,38 +138,37 @@ class PanoViewer {
         const container = this.scene.hotspotContainer();
         let hs;
         try {
-            hotspots.sort(function (hotspotA, hotspotB) {
+            hotspots.sort((hotspotA, hotspotB) => {
                 return hotspotB.distance - hotspotA.distance;
             }).forEach((hotspot) => {
                 hs = new Hotspot(hotspot.id, config.CAMERA_HEIGHT, hotspot.distance, hotspot.yaw, hotspot.year)
                 hs.element.firstChild.addEventListener('click', () => this._updatePanorama(hotspot.id));
                 container.createHotspot(hs.element, hs.position);
-            }
-        );
+            });
         } catch (e) {
-            console.log(e);
+            console.error(`Failed to init hotspots: ${e}`);
         }
     }
 
     _addCallbacks() {
-        let event_register = null;
+        let eventRegister = null;
         for (let evt of Object.keys(config.CALLBACKS)) {
             if (evt === 'active' || evt === 'inactive') {
-                event_register = this.viewer.controls();
+                eventRegister = this.viewer.controls();
             } else if (evt !== 'location') {
-                event_register = this.view;
+                eventRegister = this.view;
             } else {
-                event_register = null;
+                eventRegister = null;
             }
-            if (event_register) {
-                event_register.addEventListener(evt, () => {
+            if (eventRegister) {
+                eventRegister.addEventListener(evt, () => {
                     const parameters = this.view.parameters();
                     config.CALLBACKS[evt](parameters);
                 });
             }
         }
     }
-  
+
     static _getPanoramaData (url) {
         return this._getImage(url)
             .then(this._updatePanoData);
@@ -188,7 +185,7 @@ class PanoViewer {
         const data = {
             date: new Date(response.timestamp),
             id: response.pano_id,
-            hotspots: response.adjacent.map(function (item) {
+            hotspots: response.adjacent.map((item) => {
                 return {
                     id: item.pano_id,
                     yaw: item.heading,
@@ -217,7 +214,7 @@ class PanoViewer {
         return new Promise(function (resolve, reject) {
             const request = new XMLHttpRequest();
             request.open('GET', url);
-            request.onload = function() {
+            request.onload = () => {
                 if (request.status === 200) {
                     try {
                         const response = JSON.parse(request.responseText);
@@ -230,7 +227,7 @@ class PanoViewer {
                 }
             };
             // Handling total request failure
-            request.onerror = function() {
+            request.onerror = () => {
                 reject(Error('There was a network error.'));
             };
             // Send the request

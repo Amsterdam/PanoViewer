@@ -1,7 +1,7 @@
 const scaleFactor = 10.0;
 
 class Hotspot {
-    
+
     constructor (hotspotId, cameraHeight, distance, yaw, year, hotspotNodeType, scaleToDistance) {
         this.hotspotNodeType = 'div';
         this.scaleToDistance = true;
@@ -19,7 +19,9 @@ class Hotspot {
             pitch: this.pitch
         };
         this.hotspotNodeType = hotspotNodeType || this.hotspotNodeType;
-        this.scaleToDistance = scaleToDistance || this.scaleToDistance;
+        if (scaleToDistance !== undefined) {
+            this.scaleToDistance = scaleToDistance
+        }
         // Create the element
         this.createDomElement();
     }
@@ -35,13 +37,11 @@ class Hotspot {
         innerDiv.setAttribute('class', 'c-panoviewer-hotspot__content')
         // Scale size if needed
         if (this.scaleToDistance) {
-            const angle = Math.PI / 2 -  this.pitch - (this.pitchCorrection * this.distance);
-            const rotate = 'rotateX(' + angle + 'rad)';
-            const scale = 'scale(' + scaleFactor / (this.distance) + ')';
-            innerDiv.setAttribute('style', 'transform: '+ rotate + ' ' + scale + ';');
+            const angle = Math.PI / 2 - this.pitch - (this.pitchCorrection * this.distance);
+            const rotate = `rotateX(${angle}rad)`;
+            const scale = `scale(${scaleFactor / this.distance})`;
+            innerDiv.setAttribute('style', `transform: ${rotate} ${scale};`);
             element.appendChild(innerDiv);
-        } else {
-            console.log('No scaling needed');
         }
         this.element = element;
     }

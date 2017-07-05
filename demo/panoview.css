@@ -19,18 +19,19 @@ body {
   overflow: auto;
   padding-bottom: 5%;
 }
-.button_container {
+.button-container {
   width: 33%;
   display: inline-block;
 }
 
-.city_button {
+.city-button {
   padding: 1rem 2rem;
   font-size: 3rem;
   color: black;
   background-color: inherit;
   border: 2px solid black;
   border-radius: 0.25rem;
+  cursor: pointer;
 }
 
 .text {
@@ -65,15 +66,15 @@ body {
   pointer-events: none;
 }
 .c-panoviewer-hotspot__content {
-    width: 3rem;
-    height: 3rem;
-    background-color: red;
-    border-radius: 50%;
-    cursor: pointer;
-    pointer-events: auto;
+  width: 3rem;
+  height: 3rem;
+  background-color: red;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
-#compass_container {
+#compass-container {
   position: relative;
   top: -5rem;
   width: 5rem;
@@ -91,7 +92,7 @@ body {
   display: none;
 }
 
-#compass_container.enlarge {
+#compass-container.enlarge {
   width: 10rem;
   height: 10rem;
   top: -10rem;

@@ -1,0 +1,10 @@
+*~
+.tmp
+.DS_Store
+npm-debug.log
+/node_modules
+/tmp
+/build
+/dist
+/docs
+/test/test_suite.js

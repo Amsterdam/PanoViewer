@@ -96,13 +96,13 @@ class PanoViewer {
     }
 
     /**
-     * 
-     * @param {float} lat - Latitude 
+     *
+     * @param {float} lat - Latitude
      * @param {float} lon - Longtitude
      * @param {float} [yaw] - initial yaw
      * @param {float} [pitch] - initial pitch
      * @param {float} [fov] - Field of vision
-     * 
+     *
      * This is the main api interaction for loading the panorama view.
      * After this has been called navigating within the panorama via hotspots
      * is handled by _updatePanorama
@@ -214,6 +214,9 @@ class PanoViewer {
         return new Promise(function (resolve, reject) {
             const request = new XMLHttpRequest();
             request.open('GET', url);
+            // Make sure the browser does not set this to `text/html`
+            // implicitly
+            request.setRequestHeader('Accept', '*/*');
             request.onload = () => {
                 if (request.status === 200) {
                     try {

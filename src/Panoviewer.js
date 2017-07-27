@@ -1,4 +1,3 @@
-
 import Marzipano from 'marzipano';
 import {getCenter, getElement, degreeToRadian} from './utils';
 import Hotspot from './hotspot';
@@ -199,7 +198,12 @@ class PanoViewer {
 
         // Call location change callback, if one is given
         if (config.CALLBACKS && config.CALLBACKS.location) {
-            config.CALLBACKS.location(data.location);
+            const location = {
+                date: data.date,
+                lat: data.location[0],
+                lon: data.location[1]
+            };
+            config.CALLBACKS.location(location);
         }
 
         return {

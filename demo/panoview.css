@@ -48,7 +48,7 @@ body {
   text-align: center;
 }
 
-#lat {
+#date, #lat {
   margin-right: 3rem;
 }
 

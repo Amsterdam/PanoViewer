@@ -11,7 +11,7 @@ You can download the [latest version](https://panoviewer.data.amsterdam.nl/dist/
 Each version is also available in a minimized version.
 
 ### Complete
-The complete release contains everything needed to integrate the panoviewer with your code base. This release has Marzipano included. 
+The complete release contains everything needed to integrate the panoviewer with your code base. This release has Marzipano included.
 
 ### Core
 Does not include the dependecies. If your implementation already has Marzipano included, this is a better option.
@@ -30,13 +30,14 @@ The PanoViewer accepts one of the following as the dom element identifier:
 - An dom element identifier (with or without a hash)
 - A class name (with or without the dot)
 
-When a string is passed without a has or a dot, the PanoViewer tries to retrieve an element with that identifer. If it fails, it then attempts 
+When a string is passed without a has or a dot, the PanoViewer tries to retrieve an element with that identifer. If it fails, it then attempts
 ### Supported callbacks
 
 - active
 - inactive
 - change ?
 - location : triggered by location change, not generated via event listenenr
+
 ## Demo application
 There is a demo implemetation available on the [Amsterdam data portal](https://panoviewer.data.amsterdam.nl).
 
@@ -54,9 +55,3 @@ Once the distribution has been built locally move to the demo directory and open
 Buidling the distribuition code is done by [webpack](webpack.js.org). [Babel](https://babeljs.io) is used to transpile the code from ES6 to ES5. All this is built on top of [npm](https://www.npmjs.com).
 
 The PanoViewer library is built on top of [Marzipano](http://www.marzipano.net).
-
-### Supported callbacks
-
-- active
-- inactive
-- change ?

@@ -21,6 +21,7 @@
     </div>
     <div id=main class="hide">
       <div id="info">
+        <span>Date: </span><span id="date"></span>
         <span>Latitude: </span><span id="lat"></span>
         <span>Longitude: </span><span id="lon"></span>
       </div>
@@ -43,8 +44,9 @@
       }
 
       function changeLocation(location) {
-        document.getElementById('lat').innerText = location[0];
-        document.getElementById('lon').innerText = location[1];
+        document.getElementById('date').innerText = location.date.toDateString();
+        document.getElementById('lat').innerText = location.lat;
+        document.getElementById('lon').innerText = location.lon;
       }
 
       function load(lat, lon) {

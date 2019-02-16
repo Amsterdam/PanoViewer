@@ -17,7 +17,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            Panorama component start
           </a>
         </header>
       </div>
@@ -26,3 +26,5 @@ class App extends Component {
 }
 
 export default App;
+
+

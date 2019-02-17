@@ -6,7 +6,7 @@
     "lodash.throttle": "^4.1.1",
     "marzipano": "^0.8.0",
     "react": "^16.8.1",
-    "react-dom": "^16.8.1",
+    "react-dom": "^16.8.2",
     "react-redux": "^6.0.0",
     "react-scripts": "2.1.5",
     "redux": "^4.0.1",

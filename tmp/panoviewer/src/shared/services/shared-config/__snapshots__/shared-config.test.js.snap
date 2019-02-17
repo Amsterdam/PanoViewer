@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The sharedConfig service gives you the configuration based on global environment 1`] = `
+Object {
+  "API_ROOT": "https://acc.api.data.amsterdam.nl/",
+  "AUTH_HEADER_PREFIX": "Bearer ",
+  "CACHE_EXPIRATION": 0,
+  "CACHE_THRESHOLD": 30,
+  "PANORAMA_THUMBNAIL_URL": "panorama/thumbnail/",
+  "RADIUS": 50,
+  "ROOT": "https://acc.data.amsterdam.nl/",
+  "ROOT_KEYS": Array [
+    "API_ROOT",
+  ],
+  "THUMBNAIL_WIDTH": 240,
+}
+`;
+
+exports[`The sharedConfig service gives you the configuration based on global environment 2`] = `
+Object {
+  "API_ROOT": "https://acc.api.data.amsterdam.nl/",
+  "AUTH_HEADER_PREFIX": "Bearer ",
+  "CACHE_EXPIRATION": 0,
+  "CACHE_THRESHOLD": 30,
+  "PANORAMA_THUMBNAIL_URL": "panorama/thumbnail/",
+  "RADIUS": 50,
+  "ROOT": "https://acc.data.amsterdam.nl/",
+  "ROOT_KEYS": Array [
+    "API_ROOT",
+  ],
+  "THUMBNAIL_WIDTH": 240,
+}
+`;
+
+exports[`The sharedConfig service gives you the configuration based on global environment 3`] = `
+Object {
+  "API_ROOT": "https://acc.api.data.amsterdam.nl/",
+  "AUTH_HEADER_PREFIX": "Bearer ",
+  "CACHE_EXPIRATION": 0,
+  "CACHE_THRESHOLD": 30,
+  "PANORAMA_THUMBNAIL_URL": "panorama/thumbnail/",
+  "RADIUS": 50,
+  "ROOT": "https://acc.data.amsterdam.nl/",
+  "ROOT_KEYS": Array [
+    "API_ROOT",
+  ],
+  "THUMBNAIL_WIDTH": 240,
+}
+`;
+
+exports[`The sharedConfig service gives you the configuration based on global environment 4`] = `
+Object {
+  "API_ROOT": "https://acc.api.data.amsterdam.nl/",
+  "AUTH_HEADER_PREFIX": "Bearer ",
+  "CACHE_EXPIRATION": 0,
+  "CACHE_THRESHOLD": 30,
+  "PANORAMA_THUMBNAIL_URL": "panorama/thumbnail/",
+  "RADIUS": 50,
+  "ROOT": "https://acc.data.amsterdam.nl/",
+  "ROOT_KEYS": Array [
+    "API_ROOT",
+  ],
+  "THUMBNAIL_WIDTH": 240,
+}
+`;

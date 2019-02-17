@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "leaflet": "^1.4.0",
+    "lodash.get": "^4.4.2",
+    "lodash.isundefined": "^3.0.1",
     "lodash.throttle": "^4.1.1",
     "marzipano": "^0.8.0",
+    "proj4": "^2.5.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.2",
     "react-redux": "^6.0.0",

@@ -12,7 +12,7 @@ import {
   isMapLoading,
   isMapPanelActive,
   isMarkerActive
-} from './map-selectors';
+} from './selectors';
 import { getGeoJson as getDetailGeoJson } from '../detail/map-detail';
 import { getPanoramaLocation } from '../../../panorama/ducks/selectors';
 import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection';

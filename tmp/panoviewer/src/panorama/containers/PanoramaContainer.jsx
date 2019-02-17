@@ -29,7 +29,7 @@ import {
 } from '../ducks/selectors';
 import IconButton from '../../app/components/IconButton/IconButton';
 import { getMapDetail } from '../../map/ducks/detail/map-detail';
-import { getMapOverlays } from '../../map/ducks/map/map-selectors';
+import { getMapOverlays } from '../../map/ducks/map/selectors';
 import { pageTypeToEndpoint } from '../../map/services/map-detail';
 import { setViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui';
 

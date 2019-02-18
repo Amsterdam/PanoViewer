@@ -1,11 +1,11 @@
 
 const degreeToRadian = Math.PI / 180;
 
-function isNumeric (obj) {
+function isNumeric(obj) {
     return !isNaN(obj - parseFloat(obj));
 }
 
-function getCenter (geoJSON) {
+function getCenter(geoJSON) {
     const xValues = [],
         yValues = [];
 
@@ -18,7 +18,7 @@ function getCenter (geoJSON) {
 
     xValues.sort();
     yValues.sort();
-    const  xMin = xValues[0],
+    const xMin = xValues[0],
         yMin = yValues[0],
         xMax = xValues[xValues.length - 1],
         yMax = yValues[yValues.length - 1];
@@ -28,7 +28,7 @@ function getCenter (geoJSON) {
         yMin + (yMax - yMin) / 2
     ];
 
-    function processCoordinates (coordinates) {
+    function processCoordinates(coordinates) {
         const isCoordinate = coordinates.length === 2 &&
             this.isNumeric(coordinates[0]) && this.isNumeric(coordinates[1]);
 
@@ -48,7 +48,7 @@ function getCenter (geoJSON) {
  * with # / . notation before. If no element could be
  * found returns undefined
  */
-function getElement (insertion) {
+function getElement(insertion) {
     let element;
     if (insertion) {
         // If its already a dom element its all good
@@ -65,7 +65,7 @@ function getElement (insertion) {
         element = document.getElementById(insertion);
     }
     // If found return it, otherwise go with class name
-    return  element || document.getElementsByClassName(insertion)[0];
+    return element || document.getElementsByClassName(insertion)[0];
 }
 
-export default {isNumeric, getCenter, getElement, degreeToRadian};
+export { isNumeric, getCenter, getElement, degreeToRadian };

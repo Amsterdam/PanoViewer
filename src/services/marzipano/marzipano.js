@@ -1,6 +1,6 @@
 import Marzipano from 'marzipano';
 import { PANORAMA_CONFIG } from '../panorama-api/panorama-api';
-import { degreesToRadians, radiansToDegrees } from '../../../shared/services/angle-conversion/angle-conversion';
+import { degreesToRadians, radiansToDegrees } from '../angle-conversion/angle-conversion';
 
 /*
   Calculate height of the hotspots

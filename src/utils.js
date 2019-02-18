@@ -68,4 +68,4 @@ function getElement (insertion) {
     return  element || document.getElementsByClassName(insertion)[0];
 }
 
-export {isNumeric, getCenter, getElement, degreeToRadian};
+export default {isNumeric, getCenter, getElement, degreeToRadian};

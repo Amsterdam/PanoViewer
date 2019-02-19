@@ -1,16 +1,11 @@
 const path = require('path');
-// const webpack = require('webpack');
-
+const dist = path.resolve(__dirname, 'dist');
 module.exports = [{
     entry: ['@babel/polyfill', './src/index.js'],
     mode: 'development',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'panoviewer.js'
-    },
-    resolve: {
-        extensions: ['.js'],
-        modules: ['./node_modules']
+        path: dist,
+        filename: 'panoviewer-dev.js'
     },
     module: {
         rules: [
@@ -28,5 +23,12 @@ module.exports = [{
                 }
             }
         ]
-    }
+    },
+    devtool: 'source-map',
+    devServer: {
+      historyApiFallback: true,
+      disableHostCheck: true,
+      compress: true,
+      port: 3002
+    },
 }];

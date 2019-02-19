@@ -1,6 +1,8 @@
-import {getElement, degreeToRadian} from './utils';
-import {PANORAMA_CONFIG } from './services/panorama-api/panorama-api';
-import { loadScene } from './services/marzipano/marzipano';
+import { getElement, degreeToRadian } from './utils';
+import {
+    PANORAMA_CONFIG, getImageDataByLocation, getImageDataById
+} from './services/panorama-api/panorama-api';
+import { loadScene, initialize } from './services/marzipano/marzipano';
 
 const config = {
     ...PANORAMA_CONFIG,
@@ -15,10 +17,10 @@ const _config = {
     MAX_RESOLUTION: 12 * 1024,
     CAMERA_HEIGHT: 1.8,
     LEVEL_PROPERTIES_LIST: [
-        {tileSize: 256, size: 256, fallbackOnly: true},
-        {tileSize: 512, size: 512},
-        {tileSize: 512, size: 1024},
-        {tileSize: 512, size: 2048}
+        { tileSize: 256, size: 256, fallbackOnly: true },
+        { tileSize: 512, size: 512 },
+        { tileSize: 512, size: 1024 },
+        { tileSize: 512, size: 2048 }
     ],
     CALLBACKS: null
 };
@@ -60,12 +62,12 @@ class PanoViewer {
         }
     }
 
-    _loadScene (data) {
+    _loadScene(data) {
 
         try {
             const image = data.image;
             const hotspots = data.hotspots;
-            const {heading, pitch, fov,} = this.pov;
+            const { heading, pitch, fov, } = this.pov;
             loadScene(this.viewer, null, image, heading, pitch, fov, hotspots);
         } catch (e) {
             console.error(`Error Loading scene: ${e}`);
@@ -84,7 +86,7 @@ class PanoViewer {
      * After this has been called navigating within the panorama via hotspots
      * is handled by _updatePanorama
      */
-    loadPanorama (lat, lon, tags, yaw, pitch, fov) {
+    loadPanorama(lat, lon, tags, yaw, pitch, fov) {
         // Updating POV if needed
         this.pov.fov = fov || this.pov.fov;
         this.pov.yaw = yaw || this.pov.yaw;
@@ -95,12 +97,12 @@ class PanoViewer {
             .then((data) => this._loadScene(data));
     };
 
-    _updatePanorama (panoId) {
+    _updatePanorama(panoId) {
         return (getImageDataById(panoId, this.tags))
             .then((data) => this._loadScene(data));
     };
 
-    updateConfig (opts) {
+    updateConfig(opts) {
         // @TODO Handle value carefully
         for (let opt of Object.keys(config)) {
             if (opts[opt]) {

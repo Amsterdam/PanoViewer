@@ -4,8 +4,9 @@
   "description": "A javascript library to view Amsterdam muncipality panorama images.",
   "main": "dist/panoviewer.min.js",
   "scripts": {
-    "start": "",
-    "build": "webpack --env prod ",
+    "start": "webpack-dev-server --env dev",
+    "build": "webpack --env prod --profile --colors",
+    "build:dev": "webpack --env dev --profile --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

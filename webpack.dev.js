@@ -1,10 +1,12 @@
 const path = require('path');
-const dist = path.resolve(__dirname, 'dist');
+const test = path.resolve(__dirname, 'test');
+console.log(test);
 module.exports = [{
     entry: ['@babel/polyfill', './src/index.js'],
     mode: 'development',
     output: {
-        path: dist,
+        path: test,
+        publicPath: 'test/',
         filename: 'panoviewer-dev.js'
     },
     module: {

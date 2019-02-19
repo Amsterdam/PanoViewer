@@ -63,12 +63,12 @@ class PanoViewer {
     }
 
     _loadScene(data) {
-
         try {
             const image = data.image;
             const hotspots = data.hotspots;
-            const { heading, pitch, fov, } = this.pov;
-            loadScene(this.viewer, null, image, heading, pitch, fov, hotspots);
+            const { heading, pitch, fov } = this.pov;
+            const click = () => {console.log('click');}
+            loadScene(this.viewer, click, image, heading, pitch, fov, hotspots);
         } catch (e) {
             console.error(`Error Loading scene: ${e}`);
         }

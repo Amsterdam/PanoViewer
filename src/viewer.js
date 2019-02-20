@@ -6,7 +6,6 @@ import { loadScene, initialize } from './services/marzipano/marzipano';
 
 const config = {
     ...PANORAMA_CONFIG,
-    FOV: 80 * degreeToRadian,
 }
 
 const _config = {
@@ -41,10 +40,11 @@ const viewerOpts = {
 class PanoViewer {
 
     constructor(insertion, opts) {
+        console.log(config);
         this.view = null;
         this.scene = null;
         this.pov = {
-            fov: config.FOV,
+            fov: config.DEFAULT_FOV,
             yaw: 0,
             pitch: 0
         }
@@ -60,15 +60,20 @@ class PanoViewer {
         if (opts) {
             this.updateConfig(opts);
         }
+
+        this._updatePanorama = this._updatePanorama.bind(this);
+
     }
 
     _loadScene(data) {
         try {
+            console.log(data);
             const image = data.image;
             const hotspots = data.hotspots;
-            const { heading, pitch, fov } = this.pov;
-            const click = () => {console.log('click');}
-            loadScene(this.viewer, click, image, heading, pitch, fov, hotspots);
+            const { yaw, pitch, fov } = this.pov;
+            // const click = () => {console.log('click');}
+            const click = this._updatePanorama
+            loadScene(this.viewer, click, image, yaw, pitch, fov, hotspots);
         } catch (e) {
             console.error(`Error Loading scene: ${e}`);
         }
@@ -97,7 +102,10 @@ class PanoViewer {
             .then((data) => this._loadScene(data));
     };
 
-    _updatePanorama(panoId) {
+    _updatePanorama(panoId, tags) {
+
+        console.log(panoId, this, this.tags);
+        this.tags = tags || this.tags;
         return (getImageDataById(panoId, this.tags))
             .then((data) => this._loadScene(data));
     };

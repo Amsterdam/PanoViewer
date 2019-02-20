@@ -90,7 +90,7 @@ export function initialize(domElement, options) {
 /*
   Load the Marzipano viewer into its view components
 */
-export function loadScene(viewer, onClickHandler, image, heading, pitch, fov, hotspots) {
+export function loadScene(viewer, onClickHandler, image, yaw, pitch, fov, hotspots) {
   const source = Marzipano.ImageUrlSource.fromString(
     image.pattern,
     { cubeMapPreviewUrl: image.preview }
@@ -100,26 +100,25 @@ export function loadScene(viewer, onClickHandler, image, heading, pitch, fov, ho
     PANORAMA_CONFIG.MAX_RESOLUTION,
     degreesToRadians(PANORAMA_CONFIG.MAX_FOV)
   );
-
   const view = new Marzipano.RectilinearView(null, viewLimiter);
 
   const scene = viewer.createScene({
-    source,
-    geometry: new Marzipano.CubeGeometry(PANORAMA_CONFIG.LEVEL_PROPERTIES_LIST),
-    view,
-    pinFirstLevel: true
-  });
+      source,
+      geometry: new Marzipano.CubeGeometry(PANORAMA_CONFIG.LEVEL_PROPERTIES_LIST),
+      view,
+      pinFirstLevel: true
+    });
 
-   // Do not mutate someone else's data collection!
-  const hotspotsObject = JSON.parse(JSON.stringify(hotspots));
+    // Do not mutate someone else's data collection!
+    const hotspotsObject = JSON.parse(JSON.stringify(hotspots));
 
-  hotspotsObject
+    hotspotsObject
     .sort((hotspotA, hotspotB) => hotspotB.distance - hotspotA.distance)
     .forEach((hotspot) => createHotspotTemplate(viewer, scene, view, hotspot, onClickHandler));
 
-  view.setYaw(degreesToRadians(heading));
-  view.setPitch(degreesToRadians(pitch));
-  view.setFov(degreesToRadians(fov));
+    view.setYaw(degreesToRadians(yaw));
+    view.setPitch(degreesToRadians(pitch));
+    view.setFov(degreesToRadians(fov));
 
   return scene.switchTo();
 }

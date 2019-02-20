@@ -1,6 +1,6 @@
 import sharedConfig from '../../config/config';
 import { getByUri } from '../api/api';
-import { getCenter }  from '../../utils';
+import getCenter from '../geo-json/geo-json';
 
 export const PANORAMA_CONFIG = {
   PANORAMA_ENDPOINT_PREFIX: 'panorama/panoramas',

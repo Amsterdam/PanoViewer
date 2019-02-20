@@ -1,4 +1,3 @@
-import { getElement } from './utils';
 import {
   getImageDataByLocation,
   getImageDataById
@@ -24,11 +23,11 @@ class PanoViewer {
       pitch: 0,
       fov: 80
     }
-    this.tags = null;
+    this.tags = ['mission-bi'];
     this.eventCallbacks = null;
     this.registeredEvents = [];
 
-    const panoElement = getElement(elementId);
+    const panoElement = document.getElementById(elementId);
     if (!panoElement) {
       return Error('No dom element available');
     }
@@ -63,6 +62,7 @@ class PanoViewer {
     // Updating POV if needed
     this.pov = { yaw, pitch, fov };
     const location = [lat, lon];
+    console.log('load', tags);
     return (getImageDataByLocation(location, tags))
       .then((data) => this._loadScene(data));
   };

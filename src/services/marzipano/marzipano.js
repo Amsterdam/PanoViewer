@@ -1,6 +1,7 @@
 import Marzipano from 'marzipano';
 import { PANORAMA_CONFIG } from '../panorama-api/panorama-api';
 import { degreesToRadians, radiansToDegrees } from '../angle-conversion/angle-conversion';
+import createHotspot from '../hotspot/hotspot';
 
 /*
   Calculate height of the hotspots
@@ -39,31 +40,11 @@ function createHotspotTemplate(viewer, scene, view, hotspot, onClickHandler) {
 
   const size = Math.round((radiansToDegrees(viewAngle) * viewport) / PANORAMA_CONFIG.DEFAULT_FOV);
   const year = hotspot.year;
+
   /*
     Create hotspot element and render to static markup ReactdomElement
   */
-  const hotspotElement = document.createElement('div');
-  hotspotElement.className = 'hotspot';
-  hotspotElement.innerHTML = `<div
-  className="hotspot"
->
-  <button
-    className={'c-hotspot c-hotspot--year-${year} qa-hotspot-button'}
-  >
-    <div
-      className="qa-hotspot-rotation"
-      style={{ width: '${size}px', height: '${size}px', transform: 'rotateX(${angle}deg)' }}
-    >
-      <div
-        className="c-hotspot__image"
-        style={{ width: '${size}px', height: '${size}px' }}
-      />
-    </div>
-
-    <span className="u-sr-only">Navigeer naar deze locatie</span>
-  </button>
-</div>
-  `;
+  const hotspotElement = createHotspot(angle, hotspot.distance);
 
   // Add onClick event to hotspot
   hotspotElement.addEventListener('click', () => {
@@ -74,7 +55,7 @@ function createHotspotTemplate(viewer, scene, view, hotspot, onClickHandler) {
     yaw: degreesToRadians(hotspot.heading),
     pitch: hotspotPitch
   };
-
+console.log(hotspot, position);
   return scene.hotspotContainer().createHotspot(hotspotElement, position);
 }
 

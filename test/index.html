@@ -54,7 +54,7 @@
     function load(lat, lon) {
       document.getElementById('selector').classList.toggle('hide');
       document.getElementById('main').classList.toggle('hide');
-      pv = new PanoViewer('#pano');
+      pv = new PanoViewer('pano');
       pv.setEventCallbacks({
         change: turnCompass,
         active: blinkCompass,

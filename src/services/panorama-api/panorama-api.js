@@ -141,7 +141,7 @@ export function getImageDataByLocation(location, tags) {
 
 export function getImageDataById(id, tags) {
   const { adjacenciesParams } = getLocationHistoryParams(null, tags);
-
+console.log(adjacenciesParams);
   return fetchPanorama(
     `${sharedConfig.API_ROOT}${prefix}/${id}/${suffix}/?${adjacenciesParams}`
   );

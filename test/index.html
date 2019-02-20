@@ -41,9 +41,9 @@
     }
 
     function blinkCompass(params) {
-        const compass = document.getElementById('compass-container');
-        compass.classList.toggle('enlarge');
-      }
+      const compass = document.getElementById('compass-container');
+      compass.classList.toggle('enlarge');
+    }
 
     function changeLocation(location) {
       document.getElementById('date').innerText = location.date.toDateString();
@@ -55,7 +55,7 @@
       document.getElementById('selector').classList.toggle('hide');
       document.getElementById('main').classList.toggle('hide');
       pv = new PanoViewer('#pano');
-      pv.setEvents({
+      pv.setEventCallbacks({
         change: turnCompass,
         active: blinkCompass,
         inactive: blinkCompass,

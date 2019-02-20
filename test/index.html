@@ -40,6 +40,11 @@
       compass.setAttribute('style', 'transform: rotateZ(' + direction + 'rad);');
     }
 
+    function blinkCompass(params) {
+        const compass = document.getElementById('compass-container');
+        compass.classList.toggle('enlarge');
+      }
+
     function changeLocation(location) {
       document.getElementById('date').innerText = location.date.toDateString();
       document.getElementById('lat').innerText = location.lat;
@@ -52,6 +57,8 @@
       pv = new PanoViewer('#pano');
       pv.setEvents({
         change: turnCompass,
+        active: blinkCompass,
+        inactive: blinkCompass,
         location: changeLocation
       });
       pv.loadPanorama(lat, lon);

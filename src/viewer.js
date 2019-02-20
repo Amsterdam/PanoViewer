@@ -26,6 +26,7 @@ class PanoViewer {
     }
     this.tags = null;
     this.events = null;
+    this.registeredEvents = [];
 
     const panoElement = getElement(elementId);
     if (!panoElement) {
@@ -37,6 +38,7 @@ class PanoViewer {
     this._updatePanorama = this._updatePanorama.bind(this);
     this._updateLocation = this._updateLocation.bind(this);
     this._bindEvents = this._bindEvents.bind(this);
+    this._unbindEvents = this._unbindEvents.bind(this);
   }
 
   _loadScene(data) {
@@ -45,8 +47,8 @@ class PanoViewer {
       const hotspots = data.hotspots;
       const { yaw, pitch, fov } = this.pov;
       const onClick = this._updatePanorama;
+      this._unbindEvents();
       const scene = loadScene(this.viewer, onClick, image, yaw, pitch, fov, hotspots);
-
       const view = scene.view();
       this._updateLocation(data);
       this._bindEvents(view);
@@ -98,16 +100,23 @@ class PanoViewer {
     this.events = events;
   }
 
+  _unbindEvents() {
+    this.registeredEvents.forEach((event) => {
+      event.target.removeEventListener(event.name, event.handler);
+      console.log('unregister', event);
+    })
+    this.registeredEvents = [];
+  }
+
   _bindEvents(view) {
-    // update the point of view for each change
-    view.addEventListener('change', () => {
+    const updatePov = () => {
       const pov = view.parameters();
       this.pov = {
         yaw: radiansToDegrees(pov.yaw),
         pitch: radiansToDegrees(pov.pitch),
         fov: radiansToDegrees(pov.fov)
       };
-    });
+    }
 
     for (let evt of Object.keys(this.events)) {
       let eventRegister = null;
@@ -117,16 +126,25 @@ class PanoViewer {
       };
 
       switch (evt) {
+        case 'active':
+        case 'inactive':
+        eventRegister = this.viewer.controls();
+        this.registeredEvents.push({ target: eventRegister, name: evt, handler: handleEvent });
+
+        break;
         case 'change':
-          eventRegister = view;
-          break;
+        eventRegister = view;
+        this.registeredEvents.push({ target: eventRegister, name: evt, handler: updatePov });
+        this.registeredEvents.push({ target: eventRegister, name: evt, handler: handleEvent });
+        break;
 
-      }
-
-      if (eventRegister) {
-        eventRegister.addEventListener(evt, handleEvent);
       }
     }
+
+    this.registeredEvents.forEach((event) => {
+      event.target.addEventListener(event.name, event.handler);
+      console.log('register', event);
+    })
   }
 
 

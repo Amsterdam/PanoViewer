@@ -1,7 +1,7 @@
-version: '3.0'
+version: '3.5'
 services:
   panoviewer:
     build:
       context: .
     ports:
-      - "8091:80"
+      - "5002:80"

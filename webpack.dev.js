@@ -1,5 +1,7 @@
 const path = require('path');
 const test = path.resolve(__dirname, 'test');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = [{
     entry: ['@babel/polyfill', './src/index.js'],
     mode: 'development',
@@ -32,4 +34,9 @@ module.exports = [{
       compress: true,
       port: 3002
     },
+    plugins: [
+      new CopyWebpackPlugin([
+        { from: './src/assets/', to: './assets/' },
+      ])
+    ]
 }];

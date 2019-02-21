@@ -1,3 +1,3 @@
-import PanoViewer from './Panoviewer';
+import PanoViewer from './viewer';
 
 window.PanoViewer = PanoViewer;

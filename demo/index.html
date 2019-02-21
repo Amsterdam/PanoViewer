@@ -1,10 +1,13 @@
 <html>
   <head>
     <link rel="stylesheet" href="panoview.css" />
+    <script src="../dist/panoviewer.min.js"></script>
   </head>
   <body>
-    <script src="../dist/panoviewer.min.js"></script>
     <div id="selector">
+      <div>
+        <p class="text">This is a demo implementation of the panoviewer component</p>
+      </div>
       <div class="buttons">
         <div class="button-container">
           <button onclick="load(52.375000, 5.215400)" class="city-button">Almere</button>
@@ -17,7 +20,7 @@
         </div>
       </div>
       <hr>
-      <p class="text">Kies een stad om te bekijken</p>
+      <p class="text">Choose one city for panorama navigation</p>
     </div>
     <div id=main class="hide">
       <div id="info">

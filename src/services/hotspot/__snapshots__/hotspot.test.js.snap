@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`hotspot should create the hotspot 1`] = `
+<div
+  class="c-panoviewer-hotspot"
+>
+  <button
+    class="c-panoviewer-hotspot__content"
+    style="transform: rotateX(90deg) scale(0.2);"
+  />
+</div>
+`;

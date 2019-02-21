@@ -28,6 +28,7 @@ class PanoViewer {
     this.registeredEvents = [];
 
     const panoElement = document.getElementById(elementId);
+    console.log('pano', panoElement);
     if (!panoElement) {
       return Error('No dom element available');
     }

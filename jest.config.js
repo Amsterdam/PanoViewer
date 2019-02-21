@@ -30,8 +30,5 @@ module.exports = {
     '/node_modules/',
     '/test/'
   ],
-  "globals": {
-    "window": true,
-    "document": true
-  }
+  "setupFiles" : ["<rootDir>/scripts/setupFile.js"]
 };

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot --env dev",
     "build": "webpack --env prod --profile --colors",
-    "test": "jest"
+    "test": "jest --colors --coverage"
   },
   "repository": {
     "type": "git",

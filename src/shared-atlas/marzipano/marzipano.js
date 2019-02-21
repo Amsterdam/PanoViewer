@@ -1,7 +1,7 @@
 import Marzipano from 'marzipano';
 import { PANORAMA_CONFIG } from '../panorama-api/panorama-api';
 import { degreesToRadians, radiansToDegrees } from '../angle-conversion/angle-conversion';
-import createHotspot from '../hotspot/hotspot';
+import createHotspot from '../../services/hotspot/hotspot';
 
 /*
   Calculate height of the hotspots
@@ -55,7 +55,6 @@ function createHotspotTemplate(viewer, scene, view, hotspot, onClickHandler) {
     yaw: degreesToRadians(hotspot.heading),
     pitch: hotspotPitch
   };
-console.log(hotspot, position);
   return scene.hotspotContainer().createHotspot(hotspotElement, position);
 }
 

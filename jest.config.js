@@ -8,8 +8,7 @@ module.exports = {
     '!**/*.config.js',
     '!**/*.mock.js',
     '!**/index.js',
-    '!src/*.js',
-    '!src/.*.js'
+    '!src/shared-atlas/**/*.js'
   ],
   coverageDirectory: 'coverage',
   coverageThreshold: {
@@ -20,10 +19,9 @@ module.exports = {
       lines: 20
     }
   },
-  coverageReporters: process.env.CI ? [
-    'html',
-    'text'
-  ] : ['lcov'],
+  coverageReporters: process.env.CI
+    ? [ 'html','text-summary' ]
+    : [ 'lcov', 'text-summary'],
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: [
     '/demo/',

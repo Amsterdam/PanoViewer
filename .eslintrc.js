@@ -6,6 +6,8 @@ module.exports = {
   "env": {
     "browser": true,
     "jest": true,
+    // "commonjs": true,
+    // "es6": true,
     "node": true
   },
   "plugins": [

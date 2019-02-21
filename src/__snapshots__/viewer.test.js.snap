@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The viewer should create correctly 1`] = `
+exports[`The viewer The constructor should create correctly 1`] = `
 PanoViewer {
   "_bindEvents": [Function],
   "_loadScene": [Function],
@@ -45,3 +45,5 @@ PanoViewer {
   },
 }
 `;
+
+exports[`The viewer The constructor should return error when the element is not found  1`] = `[Error: No dom element available]`;

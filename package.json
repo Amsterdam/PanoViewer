@@ -37,10 +37,10 @@
     "style-loader": "^0.18.2",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.2.0"
   },
   "dependencies": {
     "ify-loader": "^1.0.4",
-    "marzipano": "^0.5.4"
+    "marzipano": "^0.8.0"
   }
 }

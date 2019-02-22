@@ -139,7 +139,6 @@ class PanoViewer {
           this.registeredEvents.push({ target: eventRegister, name: evt, handler: updatePov });
           this.registeredEvents.push({ target: eventRegister, name: evt, handler: handleEvent });
           break;
-
       }
     }
 

@@ -1,9 +1,9 @@
 import {
   getImageDataByLocation,
   getImageDataById
-} from './services/panorama-api/panorama-api';
-import { loadScene, initialize } from './services/marzipano/marzipano';
-import { radiansToDegrees } from './services/angle-conversion/angle-conversion';
+} from './shared-atlas/panorama-api/panorama-api';
+import { loadScene, initialize } from './shared-atlas/marzipano/marzipano';
+import { radiansToDegrees } from './shared-atlas/angle-conversion/angle-conversion';
 
 const viewerOpts = {
   controls: {
@@ -31,6 +31,7 @@ class PanoViewer {
     if (!panoElement) {
       return Error('No dom element available');
     }
+
     this.viewer = initialize(panoElement, viewerOpts);
 
     this._loadScene = this._loadScene.bind(this);
@@ -62,8 +63,7 @@ class PanoViewer {
     // Updating POV if needed
     this.pov = { yaw, pitch, fov };
     const location = [lat, lon];
-    console.log('load', tags);
-    return (getImageDataByLocation(location, tags))
+    return getImageDataByLocation(location, tags)
       .then((data) => this._loadScene(data));
   };
 
@@ -139,7 +139,6 @@ class PanoViewer {
           this.registeredEvents.push({ target: eventRegister, name: evt, handler: updatePov });
           this.registeredEvents.push({ target: eventRegister, name: evt, handler: handleEvent });
           break;
-
       }
     }
 

@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = [{
     entry: ['@babel/polyfill', './src/index.js'],
-    mode: 'production',
+    mode: 'none',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'panoviewer.js'
@@ -52,7 +52,7 @@ module.exports = [{
     }
 }, {
    entry: ['@babel/polyfill', './src/index.js'],
-    mode: 'production',
+    mode: 'none',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'panoviewer.core.js'

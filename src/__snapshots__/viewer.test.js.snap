@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The viewer The constructor should create correctly 1`] = `
+PanoViewer {
+  "_bindEvents": [Function],
+  "_loadScene": [Function],
+  "_unbindEvents": [Function],
+  "_updateLocation": [Function],
+  "_updatePanorama": [Function],
+  "eventCallbacks": null,
+  "pov": Object {
+    "fov": 80,
+    "pitch": 0,
+    "yaw": 0,
+  },
+  "registeredEvents": Array [],
+  "tags": Array [
+    "mission-bi",
+  ],
+  "viewer": Viewer {
+    "_addLayerToStage": [MockFunction],
+    "_addSceneEventListeners": [MockFunction],
+    "_enterIdle": [MockFunction],
+    "_leaveIdle": [MockFunction],
+    "_removeLayerFromStage": [MockFunction],
+    "_removeSceneEventListeners": [MockFunction],
+    "_resetIdleTimer": [MockFunction],
+    "_updateSceneLayers": [MockFunction],
+    "breakIdleMovement": [MockFunction],
+    "controls": [MockFunction],
+    "createEmptyScene": [MockFunction],
+    "createScene": [MockFunction],
+    "destroy": [MockFunction],
+    "destroyAllScenes": [MockFunction],
+    "destroyScene": [MockFunction],
+    "domElement": [MockFunction],
+    "hasScene": [MockFunction],
+    "listScenes": [MockFunction],
+    "lookTo": [MockFunction],
+    "renderLoop": [MockFunction],
+    "scene": [MockFunction],
+    "setIdleMovement": [MockFunction],
+    "stage": [MockFunction],
+    "startMovement": [MockFunction],
+    "stopMovement": [MockFunction],
+    "switchScene": [MockFunction],
+    "updateSize": [MockFunction],
+    "view": [MockFunction],
+  },
+}
+`;
+
+exports[`The viewer The constructor should return error when the element is not found  1`] = `[Error: No dom element available]`;

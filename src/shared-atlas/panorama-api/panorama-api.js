@@ -1,4 +1,4 @@
-import sharedConfig from '../../config/config';
+import sharedConfig from '../shared-config/shared-config';
 import { getByUri } from '../api/api';
 import getCenter from '../geo-json/geo-json';
 
@@ -141,7 +141,6 @@ export function getImageDataByLocation(location, tags) {
 
 export function getImageDataById(id, tags) {
   const { adjacenciesParams } = getLocationHistoryParams(null, tags);
-console.log(adjacenciesParams);
   return fetchPanorama(
     `${sharedConfig.API_ROOT}${prefix}/${id}/${suffix}/?${adjacenciesParams}`
   );

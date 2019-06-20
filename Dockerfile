@@ -19,7 +19,8 @@ COPY package.json package-lock.json /app/
 RUN git config --global url.https://github.com/.insteadOf git://github.com/ \
   && git config --global url."https://github.com/".insteadOf git@github.com: \
   && npm config set registry https://nexus.data.amsterdam.nl/repository/npm-group/ \
-  && npm --verbose ci
+  && npm cache verify \
+  && npm --verbose install
 
 RUN echo && echo === Docker Step 2: build the project ===
 COPY src /app/src

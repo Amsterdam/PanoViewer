@@ -16,8 +16,8 @@ RUN apt-get update && \
 RUN echo && echo === Docker Step 1: install dependencies ===
 COPY package.json package-lock.json /app/
 
-RUN git config --global url.https://github.com/.insteadOf git://github.com/ \
-  && git config --global url."https://github.com/".insteadOf git@github.com: \
+RUN git config --global url."https://github.com/".insteadOf git@github.com: \
+  && git config --global url."https://".insteadOf git:// \
   && npm config set registry https://nexus.data.amsterdam.nl/repository/npm-group/ \
   && npm cache verify \
   && npm --verbose install

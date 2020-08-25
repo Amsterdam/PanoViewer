@@ -1,5 +1,5 @@
 # Build package
-FROM node:10.10 AS build-deps
+FROM node:12 AS build-deps
 LABEL maintainer="datapunt@amsterdam.nl"
 
 WORKDIR /app
